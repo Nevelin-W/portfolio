@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio/homepage/homepage.dart';
+import 'package:myportfolio/home_page/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData.dark().copyWith(

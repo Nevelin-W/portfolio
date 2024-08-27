@@ -6,7 +6,7 @@ final ButtonStyle resumeButtonStyle = ButtonStyle(
   side: WidgetStateProperty.resolveWith<BorderSide?>(
     (Set<WidgetState> states) {
       if (states.contains(WidgetState.hovered)) {
-        return const BorderSide(color: Colors.white); // Border color on hover
+        return const BorderSide(color: Colors.black); // Border color on hover
       }
       return const BorderSide(
           color: Colors.transparent); // Default border color
@@ -15,7 +15,7 @@ final ButtonStyle resumeButtonStyle = ButtonStyle(
   backgroundColor: WidgetStateProperty.resolveWith<Color?>(
     (Set<WidgetState> states) {
       if (states.contains(WidgetState.hovered)) {
-        return Colors.white; // Background color on hover
+        return Colors.black; // Background color on hover
       }
       return Colors.transparent; // Default background color
     },
@@ -23,9 +23,9 @@ final ButtonStyle resumeButtonStyle = ButtonStyle(
   foregroundColor: WidgetStateProperty.resolveWith<Color?>(
     (Set<WidgetState> states) {
       if (states.contains(WidgetState.hovered)) {
-        return Colors.black; // Foreground color on hover
+        return Colors.white; // Foreground color on hover
       }
-      return Colors.white; // Default foreground color
+      return Colors.black; // Default foreground color
     },
   ),
 );
