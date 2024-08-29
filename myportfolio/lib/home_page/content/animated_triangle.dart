@@ -41,7 +41,7 @@ class _AnimatedTriangleState extends State<AnimatedTriangle>
       animation: _animation,
       builder: (context, child) {
         return CustomPaint(
-          size: const Size(250, 250),
+          size: const Size(270, 270),
           painter: TrianglePainter(_animation.value),
         );
       },

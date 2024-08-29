@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myportfolio/home_page/content/info_column.dart';
 import 'package:myportfolio/home_page/content/animated_triangle.dart';
+import 'package:myportfolio/home_page/content/joke_column.dart';
 
 class HomePageContent extends StatelessWidget {
   const HomePageContent({super.key});
@@ -34,9 +35,7 @@ class HomePageContent extends StatelessWidget {
             child: Container(
               color: Colors.green,
               child: const Expanded(
-                child: Column(
-                  children: [Text("joke")],
-                ),
+                child: JokeColumn()
               ),
             ),
           )

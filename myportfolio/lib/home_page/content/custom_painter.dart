@@ -7,7 +7,7 @@ class TrianglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double baseStrokeWidth = 50;
+    const double baseStrokeWidth = 50;
     final double strokeWidth = baseStrokeWidth * (1 - fillPercentage);
 
     final Paint fillPaint = Paint()
@@ -16,10 +16,10 @@ class TrianglePainter extends CustomPainter {
 
     final Paint shadowPaint = Paint()
       ..color =
-          Colors.white.withOpacity(0.7) // Adjust opacity for shadow effect
+          Colors.white.withOpacity(0.15) // Adjust opacity for shadow effect
       ..style = PaintingStyle.fill
       ..maskFilter =
-          MaskFilter.blur(BlurStyle.normal, 30); // Adjust blur radius
+          const MaskFilter.blur(BlurStyle.normal, 5); // Adjust blur radius
 
     // Define the main triangle path
     final Path trianglePath = Path()
@@ -29,7 +29,7 @@ class TrianglePainter extends CustomPainter {
       ..close();
 
     // Calculate shadow offset based on border width and fill percentage
-    final double shadowOffset =
+    const  double shadowOffset =
         10; // Adjust for how far the shadow should extend
     final Path shadowPath = Path()
       ..moveTo(size.width / 2, 0 - shadowOffset) // Top point
