@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myportfolio/home_page/buttons/resume_button.dart';
 import 'package:myportfolio/home_page/buttons/animated_menu_button.dart';
-import 'package:myportfolio/home_page/home_page_content.dart';
+import 'package:myportfolio/home_page/content/home_page_content.dart';
 import 'package:myportfolio/cerificates_page/cerificates_page.dart';
 import 'package:myportfolio/contact_me_page/contact_me_page.dart';
 import 'package:myportfolio/my_work_page/my_work_page.dart';
 import 'package:myportfolio/my_experience_page/my_experience_page.dart';
-import 'package:myportfolio/home_page/buttons/menu_button.dart';
+//import 'package:myportfolio/home_page/buttons/menu_button.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -16,13 +16,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  int _currentIndex = 0;
   final PageController _pageController = PageController();
 
   void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index; // Update the current index
-    });
     _pageController.jumpToPage(index); // Jump to the corresponding page
   }
 
@@ -89,10 +85,10 @@ class _HomepageState extends State<Homepage> {
         controller: _pageController,
         children: const [
           HomePageContent(), // Page 0
-          MyWorkPage(),      // Page 1
+          MyWorkPage(), // Page 1
           MyExperiencePage(), // Page 2
           CertificatesPage(), // Page 3
-          ContactMePage(),    // Page 4
+          ContactMePage(), // Page 4
         ],
       ),
     );

@@ -1,44 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePageContent extends StatelessWidget {
-  const HomePageContent({super.key});
+class InfoColumn extends StatelessWidget {
+  const InfoColumn({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: const Color.fromARGB(255, 0, 0, 0),
-      child:  Padding(
-        padding: const EdgeInsets.all(200),
-        child: Row(
-          children: [
-            Expanded(
-              child: _buildInfoColumn(),
-            ),
-            const Expanded(
-              child: Column(
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      children: [],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Expanded(
-              child: Column(
-                children: [Text("test")],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-Widget _buildInfoColumn() {
     const TextStyle headerTextStyle = TextStyle(
       fontSize: 50,
       fontWeight: FontWeight.bold,
@@ -92,14 +59,28 @@ Widget _buildInfoColumn() {
           child: Row(
             children: [
               TextButton(
-        onPressed: () => _launchUrl(Uri.parse('https://github.com/your-github-profile')),
-        child: const Text('GitHub'),
-      ),
-              const Text(" / "),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.transparent,
+                  overlayColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                ),
+                onPressed: () =>
+                    _launchUrl(Uri.parse('https://github.com/Nevelin-W')),
+                child: const Text('GitHub'),
+              ),
+              const Text(" /  "),
               TextButton(
-        onPressed: () => _launchUrl(Uri.parse('https://www.linkedin.com/in/your-linkedin-profile')),
-        child: const Text('LinkedIn'),
-      ),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.transparent,
+                  overlayColor: Colors.transparent,
+                  padding: EdgeInsets.zero,
+                ),
+                onPressed: () => _launchUrl(Uri.parse(
+                    'https://www.linkedin.com/in/roberts-k%C4%81rlis-%C5%A1mits-86134130b/')),
+                child: const Text('LinkedIn'),
+              ),
             ],
           ),
         ),
@@ -107,9 +88,9 @@ Widget _buildInfoColumn() {
     );
   }
 
-Future<void> _launchUrl(Uri url) async {
-  if (!await launchUrl(url)) {
-    throw Exception('Could not launch $url');
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }
-
