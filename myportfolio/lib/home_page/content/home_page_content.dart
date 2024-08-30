@@ -8,38 +8,45 @@ class HomePageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(40),
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              color: Colors.black,
-              child: IntrinsicWidth(
-                child: InfoColumn(),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.black,
-              child: const IntrinsicWidth(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [AnimatedTriangle()],
+    return ColoredBox(
+      color: Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 120, right: 120, top: 150),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.black,
+                    child: InfoColumn(),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    color: Colors.black,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [AnimatedTriangle()],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(color: Colors.black, child: JokeColumn()),
+                )
+              ],
             ),
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.green,
-              child: const Expanded(
-                child: JokeColumn()
-              ),
-            ),
-          )
-        ],
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                  child: Text("test"),
+                ))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

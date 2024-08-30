@@ -17,8 +17,11 @@ class InfoColumn extends StatelessWidget {
     );
 
     return Column(
+
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        
         const Text.rich(
           TextSpan(
             children: [
@@ -50,6 +53,7 @@ class InfoColumn extends StatelessWidget {
               TextSpan(
                 text: " - dedicated problem-solver",
                 style: bodyTextStyle,
+                
               ),
             ],
           ),
@@ -57,6 +61,7 @@ class InfoColumn extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 20, bottom: 40),
           child: Row(
+
             children: [
               TextButton(
                 style: TextButton.styleFrom(
