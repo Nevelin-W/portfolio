@@ -20,6 +20,7 @@ final ButtonStyle resumeButtonStyle = ButtonStyle(
       return Colors.transparent; // Default background color
     },
   ),
+  overlayColor: WidgetStatePropertyAll(Colors.transparent),
   foregroundColor: WidgetStateProperty.resolveWith<Color?>(
     (Set<WidgetState> states) {
       if (states.contains(WidgetState.hovered)) {

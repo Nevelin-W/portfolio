@@ -7,19 +7,21 @@ class TrianglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const double baseStrokeWidth = 50;
+    const double baseStrokeWidth = 45;
     final double strokeWidth = baseStrokeWidth * (1 - fillPercentage);
 
+    // Create gradient paint for the fill
     final Paint fillPaint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.fill;
-
-    final Paint shadowPaint = Paint()
-      ..color =
-          Colors.white12.withOpacity(0.3) // Adjust opacity for shadow effect
+      ..shader = const LinearGradient(
+        colors: [
+          Colors.lightBlueAccent,
+          Colors.lightGreenAccent
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
       ..style = PaintingStyle.fill
-      ..maskFilter =
-          const MaskFilter.blur(BlurStyle.normal, 2); // Adjust blur radius
+      ..isAntiAlias = true; // Enable anti-aliasing
 
     // Define the main triangle path
     final Path trianglePath = Path()
@@ -27,19 +29,6 @@ class TrianglePainter extends CustomPainter {
       ..lineTo(0, size.height) // Bottom left
       ..lineTo(size.width, size.height) // Bottom right
       ..close();
-
-    // Calculate shadow offset based on border width and fill percentage
-    const  double shadowOffset =
-        5; // Adjust for how far the shadow should extend
-    final Path shadowPath = Path()
-      ..moveTo(size.width / 2, 0 - shadowOffset) // Top point
-      ..lineTo(0 - shadowOffset, size.height + shadowOffset) // Bottom left
-      ..lineTo(
-          size.width + shadowOffset, size.height + shadowOffset) // Bottom right
-      ..close();
-
-    // Draw the shadow around the whole triangle
-    canvas.drawPath(shadowPath, shadowPaint);
 
     // Draw the fill of the triangle
     if (fillPercentage > 0) {
@@ -67,7 +56,8 @@ class TrianglePainter extends CustomPainter {
       final Paint borderPaint = Paint()
         ..color = Colors.white
         ..style = PaintingStyle.stroke
-        ..strokeWidth = strokeWidth;
+        ..strokeWidth = strokeWidth
+        ..isAntiAlias = true; // Enable anti-aliasing
 
       // Draw the border of the main triangle
       canvas.drawPath(trianglePath, borderPaint);

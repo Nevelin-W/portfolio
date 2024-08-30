@@ -18,33 +18,37 @@ class HomePageContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.black,
+                    color: Colors.transparent,
                     child: InfoColumn(),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    color: Colors.black,
+                    color: Colors.transparent,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [AnimatedTriangle()],
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(color: Colors.black, child: JokeColumn()),
+                  child: Container(
+                    color: Colors.transparent,
+                    child: JokeColumn(),
+                  ),
                 )
               ],
             ),
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  child: Text("test"),
-                ))
-              ],
-            )
+            Container(
+              color: Colors.white,
+              
+              child: Expanded(
+                child: Row(
+                  children: [Text("Hello"), Text("World")],
+                ),
+              ),
+            ),
           ],
         ),
       ),

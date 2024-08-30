@@ -18,7 +18,7 @@ class _AnimatedTriangleState extends State<AnimatedTriangle>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2300),
+      duration: const Duration(seconds: 5),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(

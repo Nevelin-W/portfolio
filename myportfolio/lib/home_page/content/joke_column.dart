@@ -16,13 +16,13 @@ class _JokeColumnState extends State<JokeColumn> {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Stack(
           children: [
             Material(
               elevation: 4,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20), 
               child: Container(
                 width: 500,
                 height: 300,

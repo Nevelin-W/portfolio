@@ -8,9 +8,10 @@ final theme = ThemeData.dark().copyWith(
     brightness: Brightness.dark,
     surface: const Color.fromARGB(255, 42, 51, 59),
   ),
-  textTheme: GoogleFonts.robotoTextTheme().apply(
+  textTheme: GoogleFonts.sourceCodeProTextTheme().apply(
     bodyColor: Colors.white,
     displayColor: Colors.white,
+    
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
 );
