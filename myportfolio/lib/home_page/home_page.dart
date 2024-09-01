@@ -26,12 +26,10 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
-        titleTextStyle: const TextStyle(
-          fontFamily: 'Roboto', // Custom font
-          fontWeight: FontWeight.w800,
-          fontSize: 40,
+        toolbarHeight: 80,
+        titleTextStyle: Theme.of(context).textTheme.displayLarge!.copyWith(
           color: Colors.black,
+          fontWeight: FontWeight.w800,
           letterSpacing: 1.5,
         ),
         centerTitle: false,
@@ -77,7 +75,7 @@ class _HomepageState extends State<Homepage> {
             onPressed: () => _onItemTapped(4),
           ),
           const SizedBox(width: 10),
-          const Resumebutton(),
+           Resumebutton(),
           const SizedBox(width: 10),
         ],
       ),

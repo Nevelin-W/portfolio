@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio/home_page/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myportfolio/splash_page/splash_page.dart';
 
 final theme = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.fromSeed(
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const Homepage(),
+      home:  SplashPage(),
     );
   }
 }

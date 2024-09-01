@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio/home_page/content/custom_painter.dart';
+import 'package:myportfolio/splash_page/custom_painter.dart';
 
 class AnimatedTriangle extends StatefulWidget {
   const AnimatedTriangle({super.key});
@@ -18,7 +18,7 @@ class _AnimatedTriangleState extends State<AnimatedTriangle>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(milliseconds: 1500),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(

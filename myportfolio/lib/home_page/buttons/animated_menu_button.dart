@@ -29,10 +29,12 @@ class AnimatedTextButtonState extends State<AnimatedTextButton> {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
+      fontWeight: FontWeight.w500,
+      fontSize: 16,
       letterSpacing: 1,
       color: Colors.black,
     ); // Use your desired text style
-    final underlineWidth = _isHovered ? _getTextWidth(widget.text, textStyle) : 0;
+    double underlineWidth = _isHovered ? _getTextWidth(widget.text, textStyle) : 0;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -44,11 +46,18 @@ class AnimatedTextButtonState extends State<AnimatedTextButton> {
           children: [
             Text(widget.text, style: textStyle),
             AnimatedContainer(
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               height: 2,
-              width: underlineWidth as double,
-              color: Colors.black,
-              margin: EdgeInsets.only(top: 20),
+              width: underlineWidth,
+              decoration: BoxDecoration(
+                gradient: _isHovered ? const LinearGradient(
+                  colors: [
+                    Colors.lightBlueAccent,
+                    Colors.lightGreenAccent,
+                  ],
+                ) : null,
+              ),
+              margin: const EdgeInsets.only(top: 25),
             ),
           ],
         ),
