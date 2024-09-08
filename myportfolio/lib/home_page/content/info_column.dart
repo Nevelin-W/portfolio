@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:myportfolio/home_page/buttons/link_button.dart';
 
 class InfoColumn extends StatefulWidget {
-  const InfoColumn({super.key});
+  final VoidCallback onSeeMyWorkPressed;
+
+  const InfoColumn({super.key, required this.onSeeMyWorkPressed});
 
   @override
-  _InfoColumnState createState() => _InfoColumnState();
+  InfoColumnState createState() => InfoColumnState();
 }
 
-class _InfoColumnState extends State<InfoColumn>
+class InfoColumnState extends State<InfoColumn>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  bool _isHovered = false; // State variable to track hover
+  bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 3),
       vsync: this,
     )..repeat(reverse: false);
 
@@ -26,7 +28,6 @@ class _InfoColumnState extends State<InfoColumn>
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    // Start the animation
     _controller.forward();
   }
 
@@ -56,13 +57,12 @@ class _InfoColumnState extends State<InfoColumn>
           "DevOps Engineer\n& Flutter Enthusiast",
           headerTextStyle,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         _buildAnimatedText(
-          "Hi, I'm Roberts Kārlis Šmits!\n - a passionate mobile developer\n - a student at RTU Information & Technologies\n - a lifelong learner",
+          "Hi, I'm Roberts Kārlis Šmits!\n - a passionate mobile developer\n - a student at RTU Information Technologies\n - a lifelong learner",
           bodyTextStyle,
         ),
-        //BUTTON WITH TEXT "See My Experience" AND ARROW ICON
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         MouseRegion(
           onEnter: (_) => setState(() => _isHovered = true),
           onExit: (_) => setState(() => _isHovered = false),
@@ -71,35 +71,28 @@ class _InfoColumnState extends State<InfoColumn>
               overlayColor: Colors.transparent,
               foregroundColor: _isHovered ? Colors.black : Colors.white,
               backgroundColor: _isHovered ? Colors.white : Colors.black,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 10, vertical: 12), // Adjust padding
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               shape: ContinuousRectangleBorder(
                 side: BorderSide(
                     color: _isHovered ? Colors.black : Colors.white, width: 2),
               ),
-              minimumSize:
-                  Size(200, 50), // Optional: Set a minimum size for the button
+              minimumSize: const Size(200, 50),
             ),
-            onPressed: () {
-              // Add your navigation or action here
-            },
+            onPressed: widget.onSeeMyWorkPressed, // Call the scroll function
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "SEE MY WORK",
                   style: bodyTextStyle.copyWith(
-                    color: _isHovered
-                        ? Colors.black
-                        : Colors.white, // Change text color on hover
+                    color:
+                        _isHovered ? Colors.black : Colors.white,
                   ),
                 ),
-                SizedBox(width: 12), // Adjust spacing between text and icon
+                const SizedBox(width: 12),
                 Icon(
                   Icons.arrow_forward,
-                  color: _isHovered
-                      ? Colors.black
-                      : Colors.white, // Change icon color on hover
+                  color: _isHovered ? Colors.black : Colors.white,
                 ),
               ],
             ),
@@ -109,16 +102,18 @@ class _InfoColumnState extends State<InfoColumn>
           padding: const EdgeInsets.only(top: 30, bottom: 40),
           child: Row(
             children: [
-              _buildLinkButton(
-                'GitHub',
-                'https://github.com/Nevelin-W',
-                bodyTextStyle.copyWith(color: Color.fromARGB(255, 50, 201, 90)),
+              LinkButton(
+                text: 'GitHub',
+                url: 'https://github.com/Nevelin-W',
+                style: bodyTextStyle.copyWith(
+                    color: const Color.fromARGB(255, 50, 201, 90)),
               ),
               Text(" / ", style: bodyTextStyle),
-              _buildLinkButton(
-                'LinkedIn',
-                'https://www.linkedin.com/in/roberts-k%C4%81rlis-%C5%A1mits-86134130b/',
-                bodyTextStyle.copyWith(color: Colors.lightBlueAccent),
+              LinkButton(
+                text: 'LinkedIn',
+                url:
+                    'https://www.linkedin.com/in/roberts-k%C4%81rlis-%C5%A1mits-86134130b/',
+                style: bodyTextStyle.copyWith(color: Colors.lightBlueAccent),
               ),
             ],
           ),
@@ -143,24 +138,5 @@ class _InfoColumnState extends State<InfoColumn>
         );
       },
     );
-  }
-
-  Widget _buildLinkButton(String text, String url, TextStyle style) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.transparent,
-        overlayColor: Colors.transparent,
-        padding: EdgeInsets.zero,
-      ),
-      onPressed: () => _launchUrl(Uri.parse(url)),
-      child: Text(text, style: style),
-    );
-  }
-
-  Future<void> _launchUrl(Uri url) async {
-    if (!await launchUrl(url)) {
-      throw Exception('Could not launch $url');
-    }
   }
 }

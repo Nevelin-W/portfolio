@@ -15,8 +15,7 @@ class _JokeColumnState extends State<JokeColumn> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+     
       children: [
         Stack(
           children: [
@@ -24,8 +23,8 @@ class _JokeColumnState extends State<JokeColumn> {
               elevation: 4,
               borderRadius: BorderRadius.circular(20), 
               child: Container(
-                width: 500,
-                height: 300,
+                width: 400,
+                height: 200,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -47,7 +46,7 @@ class _JokeColumnState extends State<JokeColumn> {
             ),
             Positioned(
               top: 30,
-              left: 20,
+              left: 15,
               child: Row(
                 children: [
                   const Text(
@@ -64,7 +63,7 @@ class _JokeColumnState extends State<JokeColumn> {
                       TypewriterAnimatedText(
                         'find / -name "life.dart"',
                         textStyle: const TextStyle(
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -84,7 +83,7 @@ class _JokeColumnState extends State<JokeColumn> {
             if (_showSecondAnimation)
               Positioned(
                 top: 70,
-                left: 20,
+                left: 15,
                 child: Row(
                   children: [
                     AnimatedTextKit(
@@ -92,7 +91,7 @@ class _JokeColumnState extends State<JokeColumn> {
                         TyperAnimatedText(
                           '> Searching...',
                           textStyle: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey,
                           ),
@@ -112,7 +111,7 @@ class _JokeColumnState extends State<JokeColumn> {
               if (_showThirdAnimation)
               Positioned(
                 top: 100,
-                left: 20,
+                left: 15,
                 child: Row(
                   children: [
                     AnimatedTextKit(
@@ -120,7 +119,7 @@ class _JokeColumnState extends State<JokeColumn> {
                         TyperAnimatedText(
                           '> Error: No life found!',
                           textStyle: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.red,
                           ),
@@ -140,7 +139,7 @@ class _JokeColumnState extends State<JokeColumn> {
               if (_showForthAnimation)
               Positioned(
                 top: 130,
-                left: 20,
+                left: 15,
                 child: Row(
                   children: [
                     AnimatedTextKit(
@@ -148,7 +147,7 @@ class _JokeColumnState extends State<JokeColumn> {
                         TyperAnimatedText(
                           '> Since you are a programmer, you have no life!',
                           textStyle: const TextStyle(
-                            fontSize: 15,
+                            fontSize: 13,
                             fontWeight: FontWeight.bold,
                             color: Colors.red,
                           ),
