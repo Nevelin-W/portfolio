@@ -4,7 +4,7 @@ import 'package:myportfolio/splash_page/splash_page.dart';
 
 final theme = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromARGB(255, 255, 255, 255),
+    seedColor: const Color.fromARGB(255, 228, 21, 21),
     brightness: Brightness.dark,
     surface: const Color.fromARGB(255, 42, 51, 59),
   ),
@@ -13,7 +13,6 @@ final theme = ThemeData.dark().copyWith(
     displayColor: Colors.white,
     
   ),
-  scaffoldBackgroundColor: const Color.fromARGB(255, 50, 58, 60),
 );
 
 void main() {
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home:  SplashPage(),
+      home: const SplashPage(),
     );
   }
 }

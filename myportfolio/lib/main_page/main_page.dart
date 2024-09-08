@@ -36,12 +36,15 @@ class _MainPageState extends State<MainPage> {
       final experienceBox = experienceContext.findRenderObject() as RenderBox;
       final projectsBox = projectsContext.findRenderObject() as RenderBox;
 
-      if (_scrollController.offset >= experienceBox.localToGlobal(Offset.zero).dy - 100 &&
-          _scrollController.offset < projectsBox.localToGlobal(Offset.zero).dy - 100) {
+      if (_scrollController.offset >=
+              experienceBox.localToGlobal(Offset.zero).dy - 100 &&
+          _scrollController.offset <
+              projectsBox.localToGlobal(Offset.zero).dy - 100) {
         setState(() {
           _indicatorPosition = 1;
         });
-      } else if (_scrollController.offset >= projectsBox.localToGlobal(Offset.zero).dy - 100) {
+      } else if (_scrollController.offset >=
+          projectsBox.localToGlobal(Offset.zero).dy - 100) {
         setState(() {
           _indicatorPosition = 2;
         });
@@ -74,26 +77,45 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: BoxConstraints.tight(const Size(1100, double.infinity)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              StaticColumn(
-                onAboutPressed: _scrollToTop,
-                onExperiencePressed: () => _scrollToSection(_experienceKey),
-                onProjectsPressed: () => _scrollToSection(_projectsKey),
-                indicatorPosition: _indicatorPosition,
-              ),
-              const SizedBox(width: 10),
-              ScrollColumn(
-                experienceKey: _experienceKey,
-                projectsKey: _projectsKey,
-                scrollController: _scrollController,
-              ),
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: const RadialGradient(
+            colors: [Colors.pink, Colors.orange],
+            center: Alignment(-0.5, -0.5),
+            radius: 0.6,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 15,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: Center(
+          child: Container(
+            constraints:
+                BoxConstraints.tight(const Size(1100, double.infinity)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                StaticColumn(
+                  onAboutPressed: _scrollToTop,
+                  onExperiencePressed: () => _scrollToSection(_experienceKey),
+                  onProjectsPressed: () => _scrollToSection(_projectsKey),
+                  indicatorPosition: _indicatorPosition,
+                ),
+                const SizedBox(width: 10),
+                ScrollColumn(
+                  experienceKey: _experienceKey,
+                  projectsKey: _projectsKey,
+                  scrollController: _scrollController,
+                ),
+              ],
+            ),
           ),
         ),
       ),

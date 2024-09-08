@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio/main_page/static_column/buttons/navigation_button.dart';
+import 'package:myportfolio/main_page/static_column/navigation_section/navigation_button.dart';
 
-class NavigationButtons extends StatelessWidget {
+class NavigationSection extends StatelessWidget {
   final VoidCallback onAboutPressed;
   final VoidCallback onExperiencePressed;
   final VoidCallback onProjectsPressed;
   final double indicatorPosition;
 
-  const NavigationButtons({
+  const NavigationSection({
     super.key,
     required this.onAboutPressed,
     required this.onExperiencePressed,
