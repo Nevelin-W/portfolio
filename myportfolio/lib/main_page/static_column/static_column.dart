@@ -179,7 +179,7 @@ class StaticColumn extends StatelessWidget {
                       }
                     },
                     icon:  Icon(
-                      FontAwesomeIcons.envelope,
+                      FontAwesomeIcons.solidEnvelope,
                       color: theme.colorScheme.primary,
                     ),
                     label: Text(
