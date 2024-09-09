@@ -5,6 +5,7 @@ class AboutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Text(
@@ -16,7 +17,17 @@ class AboutSection extends StatelessWidget {
         "Recently, I re-enrolled in Information Technologies to deepen my knowledge, driven by a passion for learning. "
         "Outside of work, I balance life through kitesurfing, squash, and exploring Flutter and Dart for mobile and web app development. "
         "I’ve already built a few apps, reflecting my commitment to creating functional and well-designed software.",
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+        style: theme.textTheme.bodyMedium!.copyWith(
+          //color: Colors.black,
+          fontWeight: FontWeight.w400,
+          shadows: [
+            Shadow(
+              blurRadius: 2,
+              color: Colors.black.withOpacity(0.3),
+              offset: const Offset(2.0, 2.0),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,95 +1,146 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectItem extends StatefulWidget {
-  final IconData icon; // New parameter for the icon
+  final IconData icon;
   final String title;
   final String description;
-  final List<String> techList; // List of tech used
+  final List<String> techList;
+  final String url; // Add URL property
 
   const ProjectItem({
     required this.icon,
     required this.title,
     required this.description,
-    required this.techList, // Initialize techList
+    required this.techList,
+    required this.url, // Initialize URL property
     super.key,
   });
 
   @override
-  _ProjectItemState createState() => _ProjectItemState();
+  ProjectItemState createState() => ProjectItemState();
 }
 
-class _ProjectItemState extends State<ProjectItem> {
+class ProjectItemState extends State<ProjectItem> {
   bool _isHovered = false;
+
+  // Function to open the URL
+  Future<void> _launchURL() async {
+  final Uri uri = Uri.parse(widget.url); // Parse the URL into a Uri object
+  if (await canLaunchUrl(uri)) {
+    await launchUrl(uri, webOnlyWindowName: '_blank');
+  } else {
+    throw 'Could not launch ${widget.url}';
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          _isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          _isHovered = false;
-        });
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          color: _isHovered ? Colors.grey.withOpacity(0.2) : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              widget.icon,
-              size: 30,
-              color: _isHovered ? Colors.black : Colors.grey,
-            ),
-            SizedBox(width: 16),
-            Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    widget.description,
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8.0, // Space between tech bubbles
-                    runSpacing: 8, // Space between rows of tech bubbles
-                    children: widget.techList.map((tech) {
-                      return Chip(
-                        label: Text(
-                          tech,
-                          style: TextStyle(
-                            color: Colors.white, // Adjust text color for better contrast
-                            fontSize: 10, // Slightly larger font size
-                            fontWeight: FontWeight.w400, // Bold text for emphasis
-                          ),
-                        ),
-                        backgroundColor: Colors.black.withOpacity(0.2), // Softer background color with a slight blue tint
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // Rounded corners for a modern feel
-                          side: BorderSide(color: Colors.black.withOpacity(0.2), width: 1.5), // Subtle border color and width
-                        ),
-                      );
-                    }).toList(),
+    final theme = Theme.of(context);
+    return GestureDetector(
+      onTap: _launchURL, // Handle tap to open the URL
+      child: MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            _isHovered = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            _isHovered = false;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color:
+                _isHovered ? Colors.black.withOpacity(0.7) : Colors.transparent,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                widget.icon,
+                size: 25,
+                grade: 10,
+                shadows: [
+                  Shadow(
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2.0, 2.0),
                   ),
                 ],
+                color: theme.colorScheme.primary,
               ),
-            ),
-          ],
+              const SizedBox(width: 16),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.title,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w700,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 2,
+                            color: Colors.black.withOpacity(0.3),
+                            offset: const Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      widget.description,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 2,
+                            color: Colors.black.withOpacity(0.3),
+                            offset: const Offset(2.0, 2.0),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 8,
+                      children: widget.techList.map((tech) {
+                        return Chip(
+                          label: Text(
+                            tech,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2),
+                          ),
+                          backgroundColor:
+                              const Color.fromARGB(255, 42, 51, 59),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: const BorderSide(
+                              color: Color.fromARGB(255, 42, 51, 59),
+                              width: 0,
+                            ),
+                          ),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

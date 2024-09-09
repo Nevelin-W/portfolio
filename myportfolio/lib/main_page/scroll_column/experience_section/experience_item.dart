@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 
 class ExperienceItem extends StatefulWidget {
-  final String yearRange;
+  final String startDate;
+  final String endDate;
   final String title;
   final String description;
-  final List<String> techList; // New parameter for tech used
+  final List<String> techList;
 
   const ExperienceItem({
-    required this.yearRange,
+    required this.startDate,
+    required this.endDate,
     required this.title,
     required this.description,
-    required this.techList, // Initialize techList
+    required this.techList,
     super.key,
   });
 
   @override
-  _ExperienceItemState createState() => _ExperienceItemState();
+  ExperienceItemState createState() => ExperienceItemState();
 }
 
-class _ExperienceItemState extends State<ExperienceItem> {
+class ExperienceItemState extends State<ExperienceItem> {
   bool _isHovered = false;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -35,11 +38,11 @@ class _ExperienceItemState extends State<ExperienceItem> {
         });
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: _isHovered ? Colors.grey.withOpacity(0.2) : Colors.transparent,
-          
+          color:
+              _isHovered ? Colors.black.withOpacity(0.7) : Colors.transparent,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(
@@ -50,14 +53,56 @@ class _ExperienceItemState extends State<ExperienceItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.yearRange,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: widget.startDate,
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 2,
+                                color: Colors.black.withOpacity(0.3),
+                                offset: const Offset(2.0, 2.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                        TextSpan(
+                          text: ' \u{2014} ', // Bullet separator
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: theme.colorScheme.primary,
+                            fontSize: theme.textTheme.bodyMedium!.fontSize,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 2,
+                                color: Colors.black.withOpacity(0.3),
+                                offset: const Offset(2.0, 2.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                        TextSpan(
+                          text: widget.endDate,
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w700,
+                            shadows: [
+                              Shadow(
+                                blurRadius: 2,
+                                color: Colors.black.withOpacity(0.3),
+                                offset: const Offset(2.0, 2.0),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            
             Expanded(
               flex: 2,
               child: Column(
@@ -65,37 +110,67 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 children: [
                   Text(
                     widget.title,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w700,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 2,
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(2.0, 2.0),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10),
                   Text(
                     widget.description,
-                    style: TextStyle(fontSize: 14),
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 2,
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(2.0, 2.0),
+                        ),
+                      ],
+                    ),
                   ),
                   Wrap(
-                    spacing: 8.0, // Space between tech bubbles
-                    runSpacing: 8, // Space between rows of tech bubbles
+                    spacing: 8.0,
+                    runSpacing: 8,
                     children: widget.techList.map((tech) {
                       return Chip(
                         label: Text(
                           tech,
-                          style: TextStyle(
-                            color: Colors.white, // Adjust text color for better contrast
-                            fontSize: 10, // Slightly larger font size
-                            fontWeight: FontWeight.w400, // Bold text for emphasis
+                          style:  TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 2,
+                              shadows: [
+                Shadow(
+                  blurRadius: 2,
+                  color: Colors.black.withOpacity(0.3),
+                  offset: const Offset(2.0, 2.0),
+                ),
+              ],),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 42, 51, 59),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: const BorderSide(
+                            color: Color.fromARGB(255, 42, 51, 59),
+                            width: 0,
                           ),
                         ),
-                        backgroundColor: Colors.black.withOpacity(0.2), // Softer background color with a slight blue tint
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // Rounded corners for a modern feel
-                          side: BorderSide(color: Colors.black.withOpacity(0.2), width: 1.5), // Subtle border color and width
-                        ),
+
+                        materialTapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Ensure the tap target size is appropriate
                       );
                     }).toList(),
                   ),
                 ],
               ),
-              
             ),
           ],
         ),

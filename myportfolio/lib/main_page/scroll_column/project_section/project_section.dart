@@ -6,39 +6,41 @@ class ProjectSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         ProjectItem(
-          icon: Icons.code, // Example icon
-          title: 'Personal Website',
+          icon: Icons.web, 
+          title: 'Portfolio Website',
           description: '''
 • Developed a personal website using Flutter for web.
 • Implemented a responsive design with custom animations and transitions.
 • Integrated a contact form and portfolio sections.
 ''',
-          techList: ['Flutter', 'Dart', 'Responsive Design'], // List of tech used
+          techList: ['Flutter', 'Dart'],
+          url: 'https://github.com/Nevelin-W/portfolio', // Replace with actual URL
         ),
         SizedBox(height: 10),
         ProjectItem(
-          icon: Icons.cloud, // Example icon
-          title: 'Weather App',
+          icon: Icons.shopping_cart, 
+          title: 'Shopping List App',
           description: '''
-• Created a weather application using Dart and Flutter.
-• Integrated a third-party weather API to fetch live data.
-• Implemented features like location-based weather and theme-based UI.
+• Developed a shopping list application using Dart and Flutter.
+• Utilized Firebase for storing and managing shopping list items in real-time.
 ''',
-          techList: ['Flutter', 'Dart', 'Weather API'], // List of tech used
+          techList: ['Flutter', 'Dart', 'Firebase'],
+          url: 'https://github.com/Nevelin-W/shopping_list_app', // Replace with actual URL
         ),
         SizedBox(height: 10),
         ProjectItem(
-          icon: Icons.shopping_cart, // Example icon
-          title: 'E-Commerce App',
+          icon: Icons.search, 
+          title: 'GIF Search App',
           description: '''
-• Built a mobile e-commerce application with user authentication and product management.
-• Used Flutter for the frontend and Firebase for backend services.
-• Implemented a shopping cart, order processing, and user reviews.
+• Developed a mobile application for searching and sharing GIFs, utilizing the Giphy API.
+• Leveraged Flutter for the frontend and integrated Riverpod for state management.
+• Implemented features including keyword-based search, GIF preview, and sharing functionality.
 ''',
-          techList: ['Flutter', 'Firebase', 'Dart'], // List of tech used
+          techList: ['Flutter', 'Dart', 'Giphy API', 'Riverpod'],
+          url: 'https://github.com/Nevelin-W/gif_search_app', // Replace with actual URL
         ),
       ],
     );

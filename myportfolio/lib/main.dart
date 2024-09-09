@@ -4,9 +4,10 @@ import 'package:myportfolio/splash_page/splash_page.dart';
 
 final theme = ThemeData.dark().copyWith(
   colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromARGB(255, 228, 21, 21),
+    seedColor:  Colors.orange,
     brightness: Brightness.dark,
     surface: const Color.fromARGB(255, 42, 51, 59),
+    primary: const Color.fromRGBO(255, 24, 24, 1),
   ),
   textTheme: GoogleFonts.sourceCodeProTextTheme().apply(
     bodyColor: Colors.white,

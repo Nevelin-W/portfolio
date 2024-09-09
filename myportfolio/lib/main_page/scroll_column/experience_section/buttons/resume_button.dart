@@ -5,6 +5,7 @@ class ResumeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextButton(
       onPressed: () {
         // Handle View Full Resume click
@@ -18,13 +19,28 @@ class ResumeButton extends StatelessWidget {
         children: [
           Text(
             'View Full Resume',
-            style: TextStyle(fontSize: 15),
+            style: theme.textTheme.bodyLarge!.copyWith(
+              shadows: [
+                Shadow(
+                  blurRadius: 2,
+                  color: Colors.black.withOpacity(0.3),
+                  offset: const Offset(2.0, 2.0),
+                ),
+              ],
+            ),
           ),
-          SizedBox(width: 8), // Spacing between text and icon
+          const SizedBox(width: 8), // Spacing between text and icon
           Icon(
             Icons.arrow_forward,
-            color: Colors.white,
-            size: 15,
+            color: theme.colorScheme.primary,
+            size: 20,
+            shadows: [
+              Shadow(
+                blurRadius: 2,
+                color: Colors.black.withOpacity(0.3),
+                offset: const Offset(2.0, 2.0),
+              ),
+            ],
           ),
         ],
       ),

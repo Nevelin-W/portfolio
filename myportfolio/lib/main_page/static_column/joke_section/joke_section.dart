@@ -74,11 +74,19 @@ class _JokeColumnState extends State<JokeSection> {
       elevation: 4,
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        width: 400,
+        width: 450,
         height: 200,
         decoration: BoxDecoration(
           color: Colors.white10,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2), // Shadow color with opacity
+              spreadRadius: 5, // How much the shadow spreads
+              blurRadius: 10, // How blurred the shadow is
+              offset: const Offset(0, 3), // Shadow position (x, y)
+            ),
+          ],
         ),
       ),
     );
@@ -147,7 +155,7 @@ class _JokeColumnState extends State<JokeSection> {
   Widget _buildThirdAnimation() {
     return AnimatedTextWidget(
       text: '> Error: No life found!',
-      color: Colors.redAccent,
+      color: const Color.fromRGBO(255, 24, 24, 1),
       onFinished: () {
         setState(() {
           _showForthAnimation = true;
@@ -159,7 +167,7 @@ class _JokeColumnState extends State<JokeSection> {
   Widget _buildForthAnimation() {
     return AnimatedTextWidget(
       text: '> Since you are a programmer, you have no life!',
-      color: Colors.redAccent,
+      color: Colors.orangeAccent,
       onFinished: () {},
     );
   }
