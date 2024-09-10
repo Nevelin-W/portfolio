@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:myportfolio/main_page/custom_scroll_view.dart';
 import 'package:myportfolio/main_page/scroll_column/scroll_column.dart';
 import 'package:myportfolio/main_page/static_column/static_column.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  _MainPageState createState() => _MainPageState();
+  MainPageState createState() => MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> {
   final GlobalKey _experienceKey = GlobalKey();
   final GlobalKey _projectsKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
@@ -95,25 +97,39 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
         child: Center(
-          child: Container(
-            constraints:
-                BoxConstraints.tight(const Size(1100, double.infinity)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                StaticColumn(
-                  onAboutPressed: _scrollToTop,
-                  onExperiencePressed: () => _scrollToSection(_experienceKey),
-                  onProjectsPressed: () => _scrollToSection(_projectsKey),
-                  indicatorPosition: _indicatorPosition,
-                ),
-                const SizedBox(width: 10),
-                ScrollColumn(
-                  experienceKey: _experienceKey,
-                  projectsKey: _projectsKey,
-                  scrollController: _scrollController,
-                ),
-              ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              constraints: const BoxConstraints(
+                minWidth: 1100,
+                maxWidth: 1100,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: StaticColumn(
+                      onAboutPressed: _scrollToTop,
+                      onExperiencePressed: () =>
+                          _scrollToSection(_experienceKey),
+                      onProjectsPressed: () => _scrollToSection(_projectsKey),
+                      indicatorPosition: _indicatorPosition,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: CustomScrollViewWidget(
+                      scrollController: _scrollController,
+                      scrollColumn: ScrollColumn(
+                        experienceKey: _experienceKey,
+                        projectsKey: _projectsKey,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

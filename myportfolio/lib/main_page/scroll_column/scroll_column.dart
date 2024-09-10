@@ -8,65 +8,39 @@ import 'package:myportfolio/main_page/scroll_column/footer_section/footer_sectio
 class ScrollColumn extends StatelessWidget {
   final GlobalKey experienceKey;
   final GlobalKey projectsKey;
-  final ScrollController scrollController;
 
   const ScrollColumn({
     super.key,
     required this.experienceKey,
     required this.projectsKey,
-    required this.scrollController,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Expanded(
-      child: Container(
-        constraints: BoxConstraints.tight(const Size(1100, double.infinity)),
-        child: RawScrollbar(
-          controller: scrollController,
-          
-          thickness: 5, 
-          radius: const Radius.circular(5), 
-          trackVisibility: false, 
-          thumbColor: theme.colorScheme.primary.withOpacity(0.7),
-          child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context).copyWith(
-              scrollbars: false
-            ),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              physics: const BouncingScrollPhysics(), 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 100),
-                  // About Section
-                  const AboutSection(),
-                  const SizedBox(height: 100),
-                  // Experience Section
-                  Container(
-                    key: experienceKey,
-                    child: const ExperienceSection(),
-                  ),
-                  const SizedBox(height: 10),
-                  const ResumeButton(),
-                  const SizedBox(height: 100),
-                  // Projects Section
-                  Container(
-                    key: projectsKey,
-                    child: const ProjectSection(),
-                  ),
-                  const SizedBox(height: 100),
-                  const FooterSection(),
-                ],
-              ),
-            ),
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(height: 100),
+        // About Section
+        const AboutSection(),
+        const SizedBox(height: 100),
+        // Experience Section
+        Container(
+          key: experienceKey,
+          child: const ExperienceSection(),
         ),
-      ),
+        const SizedBox(height: 10),
+        const ResumeButton(),
+        const SizedBox(height: 100),
+        // Projects Section
+        Container(
+          key: projectsKey,
+          child: const ProjectSection(),
+        ),
+        const SizedBox(height: 100),
+        const FooterSection(),
+      ],
     );
   }
 }
