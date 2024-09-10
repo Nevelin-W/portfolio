@@ -43,7 +43,7 @@ class ExperienceItemState extends State<ExperienceItem> {
         decoration: BoxDecoration(
           color:
               _isHovered ? Colors.black.withOpacity(0.7) : Colors.transparent,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(6),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -20,7 +20,7 @@ class NavigationButton extends StatelessWidget {
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           width: isSelected ? 40 : 15,
-          height: 2,
+          height: 3,
           color: theme.colorScheme.primary,
         ),
         const SizedBox(width: 5),

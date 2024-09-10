@@ -19,38 +19,51 @@ class ScrollColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Expanded(
       child: Container(
         constraints: BoxConstraints.tight(const Size(1100, double.infinity)),
-        child: SingleChildScrollView(
+        child: RawScrollbar(
           controller: scrollController,
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 100),
-              // About Section
-              const AboutSection(),
-              const SizedBox(height: 100),
-              // Experience Section
-              Container(
-                key: experienceKey,
-                child: const ExperienceSection(),
+          
+          thickness: 5, 
+          radius: const Radius.circular(5), 
+          trackVisibility: false, 
+          thumbColor: theme.colorScheme.primary.withOpacity(0.7),
+          child: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+              scrollbars: false
+            ),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              physics: const BouncingScrollPhysics(), 
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 100),
+                  // About Section
+                  const AboutSection(),
+                  const SizedBox(height: 100),
+                  // Experience Section
+                  Container(
+                    key: experienceKey,
+                    child: const ExperienceSection(),
+                  ),
+                  const SizedBox(height: 10),
+                  const ResumeButton(),
+                  const SizedBox(height: 100),
+                  // Projects Section
+                  Container(
+                    key: projectsKey,
+                    child: const ProjectSection(),
+                  ),
+                  const SizedBox(height: 100),
+                  const FooterSection(),
+                ],
               ),
-              const SizedBox(height: 10),
-              const ResumeButton(),
-              const SizedBox(height: 100),
-              // Projects Section
-              Container(
-                key: projectsKey,
-                child: const ProjectSection(),
-              ),
-              const SizedBox(height: 100),
-
-              const FooterSection(),
-              
-            ],
+            ),
           ),
         ),
       ),
