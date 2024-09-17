@@ -17,7 +17,7 @@ class ProjectSection extends StatelessWidget {
 • Implemented a responsive design with custom animations and transitions.
 • Integrated a contact form and portfolio sections.
 ''',
-          techList: ['Flutter', 'Dart'],
+          techList: ['Flutter', 'Dart', 'AWS, Terraform', 'Docker', 'GitHub CI/CD'],
           url: 'https://github.com/Nevelin-W/portfolio', // Replace with actual URL
         ),
         SizedBox(height: 10),

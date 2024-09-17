@@ -30,7 +30,6 @@ class ScrollColumn extends StatelessWidget {
           key: experienceKey,
           child: const ExperienceSection(),
         ),
-        const SizedBox(height: 10),
         const ResumeButton(),
         const SizedBox(height: 100),
         // Projects Section

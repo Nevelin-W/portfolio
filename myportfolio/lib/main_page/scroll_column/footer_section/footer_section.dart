@@ -74,7 +74,57 @@ class FooterSection extends StatelessWidget {
               ),
             ),
             TextSpan(
-              text: "Flutter",
+              text: "Flutter\n",
+              style: theme.textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w700,
+                shadows: [
+                  Shadow(
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text: "Hosted on ",
+              style: theme.textTheme.bodySmall!.copyWith(
+                shadows: [
+                  Shadow(
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text: "AWS\n",
+              style: theme.textTheme.bodySmall!.copyWith(
+                fontWeight: FontWeight.w700,
+                shadows: [
+                  Shadow(
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text: "Provisioned with ",
+              style: theme.textTheme.bodySmall!.copyWith(
+                shadows: [
+                  Shadow(
+                    blurRadius: 2,
+                    color: Colors.black.withOpacity(0.3),
+                    offset: const Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+            ),
+            TextSpan(
+              text: "Terraform/Docker",
               style: theme.textTheme.bodySmall!.copyWith(
                 fontWeight: FontWeight.w700,
                 shadows: [
