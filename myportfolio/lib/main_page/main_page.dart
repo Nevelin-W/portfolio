@@ -84,7 +84,7 @@ class MainPageState extends State<MainPage> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: const RadialGradient(
-            colors: [Colors.pink, Colors.orange],
+            colors: [Colors.pink, Color.fromARGB(255, 0, 106, 255)],
             center: Alignment(-0.5, -0.5),
             radius: 0.6,
           ),
