@@ -22,3 +22,7 @@ This repository contains only the Flutter/Dart project for the portfolio website
 
 Additionally, there is a second repository dedicated to provisioning AWS resources and utilizing Docker for building the Flutter webpage.
 
+## List of knows issues
+
+There are issues that i am aware of that can be found is repos issues section. I am trying to resolve them but mostly i am finding new one. One step forward two steps back is my approach apparently.
+
