@@ -18,7 +18,8 @@ class CustomScrollViewWidget extends StatelessWidget {
       thickness: 5,
       radius: const Radius.circular(5),
       trackVisibility: false,
-      thumbColor: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+      // Set thumbColor to transparent to make the scrollbar invisible
+      thumbColor: Colors.transparent,
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(
           scrollbars: false,

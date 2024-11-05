@@ -28,25 +28,99 @@ class _AboutSectionState extends State<AboutSection> {
         duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: _isHovered ? Colors.black.withOpacity(0.7) : Colors.transparent,
+          color:
+              _isHovered ? Colors.black.withOpacity(0.7) : Colors.transparent,
           borderRadius: BorderRadius.circular(6), // Rounded corners
         ),
-        child: Text(
-          "In 2021, I began studying Information Technologies at university, but after one semester, I realized academia wasn’t for me at the time. "
-          "I quickly transitioned into the tech industry, starting with MuleSoft, where I advanced from an intern to a developer. "
-          "Although valuable, I found the low-code nature of MuleSoft limiting, which prompted my shift to DevOps.\n\n"
-          "As a DevOps Engineer, I now lead infrastructure automation using Ansible, Terraform, Linux scripting, and Python. "
-          "I enjoy solving complex problems and continuously expanding my skills.\n\n"
-          "Recently, I re-enrolled in Information Technologies to deepen my knowledge, driven by a passion for learning. "
-          "Outside of work, I balance life through kitesurfing, squash, and exploring Flutter and Dart for mobile and web app development. "
-          "I’ve already built a few apps, reflecting my commitment to creating functional and well-designed software.",
-          style: theme.textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w400,
-            shadows: [
-              Shadow(
-                blurRadius: 2,
-                color: Colors.black.withOpacity(0.3),
-                offset: const Offset(2.0, 2.0),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: "A little about myself\n\n",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              TextSpan(
+                text:
+                    "In 2021, I began studying Information Technologies at RTU, but after just one semester, I realized that academia wasn’t for me at that time, "
+                    "and I quickly transitioned into the tech industry, starting as a Cloud Integrations Intern specilizing in MuleSoft, "
+                    "I advanced from intern to developer in a relativaly small amount of time. "
+                    "While I found the experience I gained to be valuable, I was concerned about the limitations of MuleSoft's low-code environment and the long-term prospects for my career, which prompted my shift in specilization/technologies.\n\n",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              TextSpan(
+                text: "Enter DevOps\n\n",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              TextSpan(
+                text:
+                    "As a Junior DevOps Engineer, I lead infrastructure automation with Ansible, Terraform, Linux scripting, and Python keeping everything from deployments to debugging in check. "
+                    "I thrive on problem-solving, whether it’s tackling complex challenges or those ‘easy-yet-elusive’ issues that keep me on my toes. "
+                    "Always expanding my skills, I’m here to make sure things run smoothly (and preferably, without any 3 a.m. surprises).\n\n",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              TextSpan(
+                text: "Outside of work\n\n",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
+              ),
+              TextSpan(
+                text:
+                    "Recently, I re-enrolled in Information Technologies to deepen my knowledge, fueled by a newfound passion for learning. "
+                    "When I’m not at work or hitting the books, you can find me kitesurfing, playing squash, or diving into Flutter and Dart development for native mobile apps and webpages—like the one you’re browsing right now!",
+                style: theme.textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 2,
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(2.0, 2.0),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

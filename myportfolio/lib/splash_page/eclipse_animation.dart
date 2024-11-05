@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EclipseAnimation extends StatefulWidget {
-  final VoidCallback onFirstAnimationComplete; // Callback for first animation
-  final VoidCallback onSecondAnimationComplete; // Callback for second animation
+  final VoidCallback onFirstAnimationComplete; // Callback for first animation completion
+  final VoidCallback onSecondAnimationComplete; // Callback for second animation completion
   final double finalSize; // Final size of the eclipse in the second animation
 
   const EclipseAnimation({
@@ -16,27 +16,34 @@ class EclipseAnimation extends StatefulWidget {
   EclipseAnimationState createState() => EclipseAnimationState();
 }
 
-class EclipseAnimationState extends State<EclipseAnimation> with TickerProviderStateMixin {
-  late final AnimationController _firstController; // First part of the animation
-  late final AnimationController _secondController; // Second part (grow the eclipse)
+class EclipseAnimationState extends State<EclipseAnimation>
+    with TickerProviderStateMixin {
+  // Animation controllers for managing the animations
+  late final AnimationController _firstController;
+  late final AnimationController _secondController;
   late final Animation<double> _firstAnimation;
   late final Animation<double> _secondAnimation;
 
   @override
   void initState() {
     super.initState();
+    _initializeAnimations();
+  }
 
+  /// Initializes the animation controllers and animations.
+  void _initializeAnimations() {
     // First animation controller (for the initial eclipse reveal)
     _firstController = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: this,
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          widget.onFirstAnimationComplete(); // Notify when first animation completes
-          _startSecondAnimation(); // Start the second animation
+          widget.onFirstAnimationComplete();
+          _startSecondAnimation();
         }
       })..forward();
 
+    // Define the first animation: fading out the eclipse
     _firstAnimation = Tween<double>(begin: 1, end: 0).animate(
       CurvedAnimation(parent: _firstController, curve: Curves.easeInOut),
     );
@@ -47,10 +54,11 @@ class EclipseAnimationState extends State<EclipseAnimation> with TickerProviderS
       vsync: this,
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
-          widget.onSecondAnimationComplete(); // Notify when second animation completes
+          widget.onSecondAnimationComplete();
         }
       });
 
+    // Define the second animation: growing the eclipse to the final size
     _secondAnimation = Tween<double>(begin: 200, end: widget.finalSize).animate(
       CurvedAnimation(parent: _secondController, curve: Curves.easeInExpo),
     );
@@ -63,24 +71,32 @@ class EclipseAnimationState extends State<EclipseAnimation> with TickerProviderS
     super.dispose();
   }
 
-  // Start second animation when the first completes
+  /// Starts the second animation when the first animation completes.
   void _startSecondAnimation() {
-    _secondController.forward();
+    _secondController.forward(); // Start the forward animation of the second controller
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.center,
+      alignment: Alignment.center, // Center the animations within the stack
       children: [
-        // Second animation: Eclipse grows to cover the screen
-        AnimatedBuilder(
-          animation: _secondAnimation,
-          builder: (context, child) {
-            return Container(
-              width: _secondAnimation.value,
-              height: _secondAnimation.value,
-              decoration: BoxDecoration(
+        _buildSecondAnimation(), // Widget for the second animation (growing eclipse)
+        _buildFirstAnimation(), // Widget for the first animation (eclipse reveal)
+      ],
+    );
+  }
+
+  /// Builds the widget for the second animation (growing eclipse).
+  Widget _buildSecondAnimation() {
+    return AnimatedBuilder(
+      animation: _secondAnimation, // Rebuild this widget when the second animation changes
+      builder: (context, child) {
+        // Create a container that represents the eclipse
+        return Container(
+          width: _secondAnimation.value,
+          height: _secondAnimation.value,
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: const RadialGradient(
               colors: [Colors.pink, Colors.orange],
@@ -95,28 +111,29 @@ class EclipseAnimationState extends State<EclipseAnimation> with TickerProviderS
               ),
             ],
           ),
-            );
-          },
-        ),
+        );
+      },
+    );
+  }
 
-        // First animation: Eclipse reveals itself
-        AnimatedBuilder(
-          animation: _firstAnimation,
-          builder: (context, child) {
-            return ClipRect(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                widthFactor: _firstAnimation.value,
-                child: Container(
-                  width: 200,
-                  height: 300,
-                  color: const Color(0xff141218),
-                ),
-              ),
-            );
-          },
-        ),
-      ],
+  /// Builds the widget for the first animation (eclipse reveal).
+  Widget _buildFirstAnimation() {
+    return AnimatedBuilder(
+      animation: _firstAnimation, // Rebuild this widget when the first animation changes
+      builder: (context, child) {
+        // Create a rectangle that masks the eclipse reveal
+        return ClipRect(
+          child: Align(
+            alignment: Alignment.centerLeft, // Align the rectangle to the left
+            widthFactor: _firstAnimation.value, // Control width based on the first animation value
+            child: Container(
+              width: 200, // Fixed width of the mask
+              height: 300, // Fixed height of the mask
+              color: const Color(0xff141218), // Color of the mask
+            ),
+          ),
+        );
+      },
     );
   }
 }

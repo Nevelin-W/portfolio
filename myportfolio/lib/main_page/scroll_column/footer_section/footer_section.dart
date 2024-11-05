@@ -12,32 +12,7 @@ class FooterSection extends StatelessWidget {
         text: TextSpan(
           children: [
             TextSpan(
-              text: "Crudely designed with ",
-              style: theme.textTheme.bodySmall!.copyWith(
-                shadows: [
-                  Shadow(
-                    blurRadius: 2,
-                    color: Colors.black.withOpacity(0.3),
-                    offset: const Offset(2.0, 2.0),
-                  ),
-                ],
-              ),
-            ),
-            TextSpan(
-              text: "Pen and Paper",
-              style: theme.textTheme.bodySmall!.copyWith(
-                fontWeight: FontWeight.w700,
-                shadows: [
-                  Shadow(
-                    blurRadius: 2,
-                    color: Colors.black.withOpacity(0.3),
-                    offset: const Offset(2.0, 2.0),
-                  ),
-                ],
-              ),
-            ),
-            TextSpan(
-              text: " :)\nCoded in ",
+              text: "Coded in ",
              style: theme.textTheme.bodySmall!.copyWith(
                 shadows: [
                   Shadow(

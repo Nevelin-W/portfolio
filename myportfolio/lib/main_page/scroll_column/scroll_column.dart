@@ -13,33 +13,29 @@ class ScrollColumn extends StatelessWidget {
     super.key,
     required this.experienceKey,
     required this.projectsKey,
-  });
+  }); 
 
   @override
   Widget build(BuildContext context) {
+   
+    final List<Widget> columnChildren = [
+      const SizedBox(height: 145),
+      const AboutSection(),
+      const SizedBox(height: 100),
+      // Experience Section with key
+      Container(key: experienceKey, child: const ExperienceSection()),
+      const ResumeButton(),
+      const SizedBox(height: 100),
+      // Projects Section with key
+      Container(key: projectsKey, child: const ProjectSection()),
+      const SizedBox(height: 100),
+      const FooterSection(),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(height: 100),
-        // About Section
-        const AboutSection(),
-        const SizedBox(height: 100),
-        // Experience Section
-        Container(
-          key: experienceKey,
-          child: const ExperienceSection(),
-        ),
-        const ResumeButton(),
-        const SizedBox(height: 100),
-        // Projects Section
-        Container(
-          key: projectsKey,
-          child: const ProjectSection(),
-        ),
-        const SizedBox(height: 100),
-        const FooterSection(),
-      ],
+      children: columnChildren,
     );
   }
 }
