@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:myportfolio/main_page/static_column/joke_section/animated_text_widget.dart'; // Import the new file for animated text widgets
+import 'package:myportfolio/main_page/static_column/joke_section/animated_text_widget.dart';
 
 class JokeSection extends StatefulWidget {
   const JokeSection({super.key});
 
   @override
-  State<JokeSection> createState() => _JokeColumnState();
+  State<JokeSection> createState() => _JokeSectionState();
 }
 
-class _JokeColumnState extends State<JokeSection> {
+class _JokeSectionState extends State<JokeSection> {
   bool _showFirstAnimation = false;
   bool _showSecondAnimation = false;
   bool _showThirdAnimation = false;
@@ -17,12 +17,14 @@ class _JokeColumnState extends State<JokeSection> {
   @override
   void initState() {
     super.initState();
-    // Trigger the first animation after a 2-second delay
+    _triggerFirstAnimation();
+  }
+
+  // Trigger the first animation with a delay, followed by the subsequent animations
+  void _triggerFirstAnimation() {
     Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
-        setState(() {
-          _showFirstAnimation = true;
-        });
+        setState(() => _showFirstAnimation = true);
       }
     });
   }
@@ -39,36 +41,17 @@ class _JokeColumnState extends State<JokeSection> {
               right: 10,
               child: _buildIndicatorDots(),
             ),
-            if (_showFirstAnimation)
-              Positioned(
-                top: 30,
-                left: 15,
-                child: _buildFirstAnimation(),
-              ),
-            if (_showSecondAnimation)
-              Positioned(
-                top: 70,
-                left: 15,
-                child: _buildSecondAnimation(),
-              ),
-            if (_showThirdAnimation)
-              Positioned(
-                top: 100,
-                left: 15,
-                child: _buildThirdAnimation(),
-              ),
-            if (_showForthAnimation)
-              Positioned(
-                top: 130,
-                left: 15,
-                child: _buildForthAnimation(),
-              ),
+            if (_showFirstAnimation) _buildFirstAnimation(),
+            if (_showSecondAnimation) _buildSecondAnimation(),
+            if (_showThirdAnimation) _buildThirdAnimation(),
+            if (_showForthAnimation) _buildForthAnimation(),
           ],
         ),
       ],
     );
   }
 
+  // Main card for the joke section with shadow and styling
   Widget _buildCard() {
     return Material(
       elevation: 4,
@@ -81,10 +64,10 @@ class _JokeColumnState extends State<JokeSection> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2), // Shadow color with opacity
-              spreadRadius: 5, // How much the shadow spreads
-              blurRadius: 10, // How blurred the shadow is
-              offset: const Offset(0, 3), // Shadow position (x, y)
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 5,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -92,6 +75,7 @@ class _JokeColumnState extends State<JokeSection> {
     );
   }
 
+  // Indicator dots at the top-right corner of the card
   Widget _buildIndicatorDots() {
     return Row(
       children: [
@@ -104,6 +88,7 @@ class _JokeColumnState extends State<JokeSection> {
     );
   }
 
+  // Single dot widget with specified color
   Widget _buildDot(Color color) {
     return Container(
       width: 10,
@@ -115,60 +100,68 @@ class _JokeColumnState extends State<JokeSection> {
     );
   }
 
+  // First animation text row, triggers the second animation on completion
   Widget _buildFirstAnimation() {
-    return Row(
-      children: [
-        const Text(
-          '\$',
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return Positioned(
+      top: 30,
+      left: 15,
+      child: Row(
+        children: [
+          const Text(
+            '\$',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
-        ),
-        const SizedBox(width: 5),
-        AnimatedTextWidget(
-          text: 'find / -name "life.dart"',
-          color: Colors.white,
-          onFinished: () {
-            setState(() {
-              _showSecondAnimation = true;
-            });
-          },
-        ),
-      ],
+          const SizedBox(width: 5),
+          AnimatedTextWidget(
+            text: 'find / -name "life.dart"',
+            color: Colors.white,
+            onFinished: () => setState(() => _showSecondAnimation = true),
+          ),
+        ],
+      ),
     );
   }
 
+  // Second animation, triggers the third animation on completion
   Widget _buildSecondAnimation() {
-    return AnimatedTextWidget(
-      text: '> Searching...',
-      color: Colors.grey,
-      onFinished: () {
-        setState(() {
-          _showThirdAnimation = true;
-        });
-      },
+    return Positioned(
+      top: 70,
+      left: 15,
+      child: AnimatedTextWidget(
+        text: '> Searching...',
+        color: Colors.grey,
+        onFinished: () => setState(() => _showThirdAnimation = true),
+      ),
     );
   }
 
+  // Third animation, triggers the fourth animation on completion
   Widget _buildThirdAnimation() {
-    return AnimatedTextWidget(
-      text: '> Error: No life found!',
-      color: const Color.fromRGBO(255, 24, 24, 1),
-      onFinished: () {
-        setState(() {
-          _showForthAnimation = true;
-        });
-      },
+    return Positioned(
+      top: 100,
+      left: 15,
+      child: AnimatedTextWidget(
+        text: '> Error: No life found!',
+        color: const Color.fromRGBO(255, 24, 24, 1),
+        onFinished: () => setState(() => _showForthAnimation = true),
+      ),
     );
   }
 
+  // Fourth and final animation, signaling the end of the joke sequence
   Widget _buildForthAnimation() {
-    return AnimatedTextWidget(
-      text: '> Since you are a programmer, you have no life!',
-      color: Colors.orangeAccent,
-      onFinished: () {},
+    return Positioned(
+      top: 130,
+      left: 15,
+      child: AnimatedTextWidget(
+        text: '> Since you are a programmer, you have no life!',
+        color: Colors.orangeAccent,
+        onFinished: () {}, // No further animations
+      ),
     );
   }
 }

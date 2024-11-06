@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
         primary: const Color.fromRGBO(255, 24, 24, 1),
       ),
       textTheme: GoogleFonts.sourceCodeProTextTheme().apply(
-        bodyColor: Colors.black,
-        displayColor: Colors.black,
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
       ),
     );
   }

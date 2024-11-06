@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:io' as io; // for mobile platforms
-import 'package:path_provider/path_provider.dart'; // for mobile platforms
-import 'package:flutter/foundation.dart' show kIsWeb; // To check if it's web
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+import 'package:flutter/services.dart' show Uint8List, rootBundle;
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html; // For web-specific logic
+import 'dart:io' as io; // For mobile (iOS/Android) platforms
+import 'package:path_provider/path_provider.dart'; // For file system access
 
 class ResumeButton extends StatefulWidget {
   const ResumeButton({super.key});
@@ -14,6 +13,56 @@ class ResumeButton extends StatefulWidget {
 }
 
 class ResumeButtonState extends State<ResumeButton> {
+  // Method to handle downloading the resume for mobile platforms
+  Future<void> _downloadResumeMobile(Uint8List bytes) async {
+    try {
+      final directory = await getTemporaryDirectory();
+      final file = io.File('${directory.path}/resume.pdf');
+      await file.writeAsBytes(bytes);
+
+      if (!mounted) return;
+
+      // Show SnackBar with option to open the file
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Resume downloaded to ${file.path}'),
+          action: SnackBarAction(
+            label: 'Open',
+            onPressed: () {
+              // Add logic to open the PDF if needed
+            },
+          ),
+        ),
+      );
+    } catch (e) {
+      _showErrorSnackBar('Failed to save resume: $e');
+    }
+  }
+
+  // Method to handle downloading the resume for web
+  void _downloadResumeWeb(Uint8List bytes) {
+    try {
+      final blob = html.Blob([bytes]);
+      final url = html.Url.createObjectUrlFromBlob(blob);
+      // ignore: unused_local_variable
+      final anchor = html.AnchorElement(href: url)
+        ..setAttribute("download", "resume.pdf")
+        ..click();
+      html.Url.revokeObjectUrl(url); // Clean up the object URL
+    } catch (e) {
+      _showErrorSnackBar('Failed to download resume: $e');
+    }
+  }
+
+  // Common error handler for SnackBar
+  void _showErrorSnackBar(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  // Main method to handle the resume download process
   Future<void> _downloadResume() async {
     try {
       // Load the resume file from assets
@@ -21,45 +70,12 @@ class ResumeButtonState extends State<ResumeButton> {
       final bytes = byteData.buffer.asUint8List();
 
       if (kIsWeb) {
-        // Web-specific logic: Create a download link and trigger the download
-        final blob = html.Blob([bytes]);
-        final url = html.Url.createObjectUrlFromBlob(blob);
-        // ignore: unused_local_variable
-        final anchor = html.AnchorElement(href: url)
-          ..setAttribute("download", "resume.pdf")
-          ..click();
-        html.Url.revokeObjectUrl(url); // Clean up the object URL
+        _downloadResumeWeb(bytes);
       } else {
-        // Mobile (iOS/Android) logic: Save to the temporary directory
-        final directory = await getTemporaryDirectory();
-        final file = io.File('${directory.path}/resume.pdf');
-        await file.writeAsBytes(bytes);
-
-        if (!mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Resume downloaded to ${file.path}'),
-            action: SnackBarAction(
-              label: 'Open',
-              onPressed: () {
-                // Add logic to open the PDF file if needed
-              },
-            ),
-          ),
-        );
+        _downloadResumeMobile(bytes);
       }
-    } catch (e, stackTrace) {
-      print('Error downloading resume: $e');
-      print('StackTrace: $stackTrace');
-
-      if (!mounted) return;
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Failed to download resume'),
-        ),
-      );
+    } catch (e) {
+      _showErrorSnackBar('Error downloading resume: $e');
     }
   }
 
@@ -77,7 +93,7 @@ class ResumeButtonState extends State<ResumeButton> {
         children: [
           Text(
             'View Full Resume',
-            style: theme.textTheme.bodyLarge!.copyWith(
+            style: theme.textTheme.bodyLarge?.copyWith(
               shadows: [
                 Shadow(
                   blurRadius: 2,
